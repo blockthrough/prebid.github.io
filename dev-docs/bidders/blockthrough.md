@@ -26,9 +26,36 @@ The BT Bid Adapter makes requests to the BT Server which supports OpenRTB.
 
 Publishers should use the `ortb2` method of setting [First Party Data](https://docs.prebid.org/features/firstPartyData.html). The BT adapter requires setup and approval from the Blockthrough team. Please reach out to marketing@blockthrough.com for more information.
 
-### Bid Params
+### Prebid JS
+
+#### Bid Params
 
 {: .table .table-bordered .table-striped }
 | Name | Scope | Description | Example | Type |
 | -------- | -------- | --------------------------- | ------- | --------- |
 | `bidderCode` | required | Bidder configuration. Could configure several bidders this way. | `bidderA: {publisherId: 55555}` | `object` |
+
+#### Bid Config
+
+Make sure to set required ab, orgID, websiteID values received after approval using `pbjs.setBidderConfig`.
+
+#### Example
+
+```javascript
+pbjs.setBidderConfig({
+  bidders: ['blockthrough'],
+  config: {
+    ortb2: {
+      site: {
+        ext: {
+          blockthrough: {
+            ab: false,
+            orgID: 'orgID',
+            websiteID: 'websiteID',
+          },
+        },
+      },
+    },
+  },
+});
+```
